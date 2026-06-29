@@ -1,57 +1,83 @@
 # Stop Slop
 
-A skill for removing AI tells from prose.
+Stop Slop is a Codex plugin for removing AI writing tells from prose.
 
-<img width="3840" height="2160" alt="G-Yg4RVbIAAhVxW" src="https://github.com/user-attachments/assets/902afc15-1f40-4a9d-af24-8cd67afb8ebf" />
+It helps Codex tighten drafts, README copy, documentation, PR descriptions, release notes, blog posts, architecture explanations, and marketing copy without flattening the author's meaning or technical accuracy.
 
-## What this is
+## What It Catches
 
-AI writing has patterns. Predictable phrases, structures, rhythms. This skill teaches Claude (or any LLM) to catch and remove them.
+- Throat-clearing openers such as "Here's the thing" and "It turns out".
+- Filler, weak intensifiers, softeners, and business jargon.
+- Formulaic structures such as "not X, but Y" and setup/reveal pivots.
+- Dramatic fragmentation and manufactured punch lines.
+- Passive or actorless phrasing when the actor is known.
+- Vague claims that announce importance without naming the specific thing.
 
-## Skill Structure
+## Codex Plugin Structure
 
-```
+```text
 stop-slop/
-├── SKILL.md              # Core instructions
-├── references/
-│   ├── phrases.md        # Phrases to remove
-│   ├── structures.md     # Structural patterns to avoid
-│   └── examples.md       # Before/after transformations
+├── .codex-plugin/
+│   └── plugin.json
+├── skills/
+│   └── stop-slop/
+│       ├── SKILL.md
+│       ├── agents/
+│       │   └── openai.yaml
+│       └── references/
+│           ├── phrases.md
+│           ├── structures.md
+│           └── examples.md
 ├── README.md
+├── CHANGELOG.md
 └── LICENSE
 ```
 
-## Quick start
+## Usage
 
-**Claude Code:** Add this folder as a skill.
+After installing the plugin in Codex, ask for it directly:
 
-**Claude Projects:** Upload `SKILL.md` and reference files to project knowledge.
+```text
+Use $stop-slop to tighten this README section.
+```
 
-**Custom instructions:** Copy core rules from `SKILL.md`.
+```text
+Use $stop-slop to review this PR description for AI writing tells.
+```
 
-**API calls:** Include `SKILL.md` in your system prompt. Reference files load on demand.
+```text
+Use $stop-slop to rewrite this architecture explanation in a direct human voice.
+```
 
-## What it catches
+Codex can also invoke the skill when a prose editing request clearly matches the skill description.
 
-**Banned phrases** - Throat-clearing openers, emphasis crutches, business jargon, all adverbs, vague declaratives, meta-commentary. See `references/phrases.md`.
+## References
 
-**Structural clichés** - Binary contrasts, negative listings, dramatic fragmentation, rhetorical setups, false agency, narrator-from-a-distance voice, passive voice. See `references/structures.md`.
+The skill uses progressive disclosure:
 
-**Sentence-level rules** - No Wh- sentence starters, no em dashes, no staccato fragmentation, no lazy extremes, active voice required.
+- `references/phrases.md` for phrase-level cleanup.
+- `references/structures.md` for structural cleanup.
+- `references/examples.md` for before/after calibration.
+
+Codex should load only the reference files needed for the current task.
 
 ## Scoring
 
-Rate 1-10 on each dimension:
+When asked for a score, Stop Slop rates prose 1-10 on:
 
 | Dimension | Question |
-|-----------|----------|
-| Directness | Statements or announcements? |
-| Rhythm | Varied or metronomic? |
-| Trust | Respects reader intelligence? |
-| Authenticity | Sounds human? |
-| Density | Anything cuttable? |
+|---|---|
+| Directness | Does it state the point without announcements? |
+| Rhythm | Does sentence length vary naturally? |
+| Trust | Does it respect reader intelligence? |
+| Authenticity | Does it sound like a person wrote it? |
+| Density | Can any words be cut without losing meaning? |
 
-Below 35/50: revise.
+Below 35/50 means revise before delivery.
+
+## Design Choice
+
+The original Stop Slop rules are intentionally sharp. This Codex plugin keeps that pressure but avoids blind deletion rules that can harm technical prose. For example, it treats adverbs and passive voice as signals to inspect, not automatic errors.
 
 ## Author
 
