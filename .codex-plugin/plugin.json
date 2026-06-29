@@ -1,0 +1,37 @@
+{
+  "name": "stop-slop",
+  "version": "1.0.0",
+  "description": "Codex plugin for removing AI writing tells from prose.",
+  "author": {
+    "name": "Hardik Pandya",
+    "url": "https://hvpandya.com"
+  },
+  "homepage": "https://github.com/hardikpandya/stop-slop",
+  "repository": "https://github.com/hardikpandya/stop-slop",
+  "license": "MIT",
+  "keywords": [
+    "writing",
+    "editing",
+    "prose",
+    "codex",
+    "ai-writing"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Stop Slop",
+    "shortDescription": "Remove AI tells from prose.",
+    "longDescription": "Stop Slop helps Codex rewrite, review, and tighten prose by removing predictable AI writing patterns such as throat-clearing, filler, business jargon, false drama, passive phrasing, and formulaic structures.",
+    "developerName": "Hardik Pandya",
+    "category": "Productivity",
+    "capabilities": [
+      "Write"
+    ],
+    "websiteURL": "https://hvpandya.com",
+    "defaultPrompt": [
+      "Use Stop Slop to tighten this draft.",
+      "Review this README for AI writing tells.",
+      "Rewrite this paragraph in a direct human voice."
+    ],
+    "brandColor": "#111827"
+  }
+}
