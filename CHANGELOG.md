@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-06-29
+
+### Changed
+
+- Converted Stop Slop into a Codex plugin with `.codex-plugin/plugin.json`.
+- Moved the active skill into `skills/stop-slop/`.
+- Added Codex skill UI metadata in `skills/stop-slop/agents/openai.yaml`.
+- Updated README guidance so Codex is the primary install and usage path.
+
 ## 2026-01-13
 
 ### Added
